@@ -1,10 +1,8 @@
-# Welcome to your brand new NodeBB forum!
+# 欢迎来到飞致社区。
 
-This is what a topic and post looks like. As an administrator, you can edit the post\'s title and content.
-To customise your forum, go to the [Administrator Control Panel](../../admin). You can modify all aspects of your forum there, including installation of third-party plugins.
+您有任何问题或者建议反馈等,都可以来此社区发表~
 
-## Additional Resources
+## 网站导航
 
-* [NodeBB Documentation](https://docs.nodebb.org)
-* [Community Support Forum](https://community.nodebb.org)
-* [Project repository](https://github.com/nodebb/nodebb)
+* [控制台](https://console.freelog.com)
+* [首页](https://www.freelog.com)
