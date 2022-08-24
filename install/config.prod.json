@@ -1,0 +1,14 @@
+{
+  "url": "http://localhost:4567",
+  "secret": "091961af-3b13-4135-8945-649a1a26478e",
+  "database": "mongo",
+  "mongo": {
+	"host": "127.0.0.1",
+	"port": 27017,
+	"username": "",
+	"password": "",
+	"database": "nodebb",
+	"uri": "mongodb://dds-wz9ac40fee5c09441.mongodb.rds.aliyuncs.com:3717,dds-wz9ac40fee5c09442.mongodb.rds.aliyuncs.com:3717/nodebb?replicaSet=mgset-44484047"
+  },
+  "port": "4567"
+}

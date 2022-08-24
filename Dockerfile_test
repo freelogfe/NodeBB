@@ -8,16 +8,17 @@ ARG NODE_ENV
 ENV NODE_ENV $NODE_ENV
 
 COPY --chown=node:node install/package.json /usr/src/app/package.json
-COPY --chown=node:node install/config.prod.json /usr/src/app/config.json
+COPY --chown=node:node install/config.test.json /usr/src/app/config.json
 
 USER node
 
-RUN npm install --only=prod && \
+RUN npm config set registry http://registry.npm.taobao.org
+RUN npm install -omit=dev && \
     npm cache clean --force
 
 COPY --chown=node:node . /usr/src/app
 
-ENV NODE_ENV=prod \
+ENV NODE_ENV=test \
     daemon=false \
     silent=false
 
