@@ -12,7 +12,8 @@ COPY --chown=node:node install/config.prod.json /usr/src/app/config.json
 
 USER node
 
-RUN npm install --only=prod && \
+RUN npm config set registry http://registry.npm.taobao.org
+RUN npm install -omit=dev && \
     npm cache clean --force
 
 COPY --chown=node:node . /usr/src/app

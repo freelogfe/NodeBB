@@ -8,7 +8,7 @@
 	"username": "",
 	"password": "",
 	"database": "nodebb",
-	"uri": "mongodb://dds-wz9ac40fee5c09441.mongodb.rds.aliyuncs.com:3717,dds-wz9ac40fee5c09442.mongodb.rds.aliyuncs.com:3717/nodebb?replicaSet=mgset-44484047"
+	"uri": "mongodb://freelog-prod-private.mongodb.rds.aliyuncs.com:3717,freelog-prod-private-secondary.mongodb.rds.aliyuncs.com:3717/admin?replicaSet=mgset-58730021"
   },
   "port": "4567"
 }
