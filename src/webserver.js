@@ -1,4 +1,3 @@
-
 'use strict';
 
 const fs = require('fs');
@@ -41,7 +40,7 @@ const helpers = require('./helpers');
 if (nconf.get('ssl')) {
 	server = require('https').createServer({
 		key: fs.readFileSync(nconf.get('ssl').key),
-		cert: fs.readFileSync(nconf.get('ssl').cert),
+		cert: fs.readFileSync(nconf.get('ssl').cert)
 	}, app);
 } else {
 	server = require('http').createServer(app);
@@ -70,14 +69,14 @@ server.on('connection', (conn) => {
 	});
 });
 
-exports.destroy = function (callback) {
+exports.destroy = function(callback) {
 	server.close(callback);
 	for (const connection of Object.values(connections)) {
 		connection.destroy();
 	}
 };
 
-exports.listen = async function () {
+exports.listen = async function() {
 	emailer.registerApp(app);
 	setupExpressApp(app);
 	helpers.register();
@@ -87,7 +86,7 @@ exports.listen = async function () {
 
 	require('./socket.io').server.emit('event:nodebb.ready', {
 		'cache-buster': meta.config['cache-buster'],
-		hostname: os.hostname(),
+		hostname: os.hostname()
 	});
 
 	plugins.hooks.fire('action:nodebb.ready');
@@ -102,7 +101,7 @@ async function initializeNodeBB() {
 	await plugins.hooks.fire('static:assets.prepare', {});
 	await plugins.hooks.fire('static:app.preload', {
 		app: app,
-		middleware: middleware,
+		middleware: middleware
 	});
 	await routes(app, middleware);
 	await privileges.init();
@@ -167,7 +166,7 @@ function setupExpressApp(app) {
 		key: nconf.get('sessionKey'),
 		cookie: setupCookie(),
 		resave: nconf.get('sessionResave') || false,
-		saveUninitialized: nconf.get('sessionSaveUninitialized') || false,
+		saveUninitialized: nconf.get('sessionSaveUninitialized') || false
 	}));
 
 	setupHelmet(app);
@@ -191,7 +190,7 @@ function setupHelmet(app) {
 		contentSecurityPolicy: false, // defaults are too restrive and break plugins that load external assets... 🔜
 		crossOriginOpenerPolicy: { policy: meta.config['cross-origin-opener-policy'] },
 		crossOriginResourcePolicy: { policy: meta.config['cross-origin-resource-policy'] },
-		referrerPolicy: { policy: 'strict-origin-when-cross-origin' },
+		referrerPolicy: { policy: 'strict-origin-when-cross-origin' }
 	};
 
 	if (!meta.config['cross-origin-embedder-policy']) {
@@ -201,7 +200,7 @@ function setupHelmet(app) {
 		options.hsts = {
 			maxAge: meta.config['hsts-maxage'],
 			includeSubDomains: !!meta.config['hsts-subdomains'],
-			preload: !!meta.config['hsts-preload'],
+			preload: !!meta.config['hsts-preload']
 		};
 	}
 
@@ -226,6 +225,8 @@ function configureBodyParser(app) {
 
 	const jsonOpts = nconf.get('bodyParser:json') || {};
 	app.use(bodyParser.json(jsonOpts));
+
+	app.use(bodyParser, { uploadDir: 'public/uploads/tmp' });
 }
 
 function setupCookie() {
@@ -280,7 +281,7 @@ async function listen() {
 	}
 
 	return new Promise((resolve, reject) => {
-		server.listen(...args.concat([function (err) {
+		server.listen(...args.concat([function(err) {
 			const onText = `${isSocket ? socketPath : `${bind_address}:${port}`}`;
 			if (err) {
 				winston.error(`[startup] NodeBB was unable to listen on: ${chalk.yellow(onText)}`);
@@ -297,7 +298,7 @@ async function listen() {
 	});
 }
 
-exports.testSocket = async function (socketPath) {
+exports.testSocket = async function(socketPath) {
 	if (typeof socketPath !== 'string') {
 		throw new Error(`invalid socket path : ${socketPath}`);
 	}
