@@ -36,7 +36,7 @@ module.exports = function(app, middleware, controllers) {
 
 	const multipart = require('connect-multiparty');
 	const multipartMiddleware = multipart({
-		uploadDir: '/usr/src/app/tmp'
+		uploadDir: '/usr/src/app/public/uploads/tmp'
 	});
 	const postMiddlewares = [
 		middleware.maintenanceMode,
