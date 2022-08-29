@@ -225,8 +225,6 @@ function configureBodyParser(app) {
 
 	const jsonOpts = nconf.get('bodyParser:json') || {};
 	app.use(bodyParser.json(jsonOpts));
-
-	app.use(express.bodyParser({uploadDir: 'public/uploads/tmp'}))
 }
 
 function setupCookie() {

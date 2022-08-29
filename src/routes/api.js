@@ -6,7 +6,7 @@ const winston = require('winston');
 const uploadsController = require('../controllers/uploads');
 const helpers = require('./helpers');
 
-module.exports = function (app, middleware, controllers) {
+module.exports = function(app, middleware, controllers) {
 	const middlewares = [middleware.authenticateRequest];
 	const router = express.Router();
 	app.use('/api', router);
@@ -35,13 +35,15 @@ module.exports = function (app, middleware, controllers) {
 	router.get('/topic/pagination/:topic_id', [...middlewares], helpers.tryRoute(controllers.topics.pagination));
 
 	const multipart = require('connect-multiparty');
-	const multipartMiddleware = multipart();
+	const multipartMiddleware = multipart({
+		uploadDir: '/usr/src/app/tmp'
+	});
 	const postMiddlewares = [
 		middleware.maintenanceMode,
 		multipartMiddleware,
 		middleware.validateFiles,
 		middleware.uploads.ratelimit,
-		middleware.applyCSRF,
+		middleware.applyCSRF
 	];
 
 	router.post('/post/upload', postMiddlewares, helpers.tryRoute(uploadsController.uploadPost));
@@ -51,6 +53,6 @@ module.exports = function (app, middleware, controllers) {
 		middleware.exposeUid,
 		middleware.ensureLoggedIn,
 		middleware.canViewUsers,
-		middleware.checkAccountPermissions,
+		middleware.checkAccountPermissions
 	], helpers.tryRoute(controllers.accounts.edit.uploadPicture));
 };
