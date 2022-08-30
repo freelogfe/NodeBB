@@ -35,7 +35,9 @@ module.exports = function(app, middleware, controllers) {
 	router.get('/topic/pagination/:topic_id', [...middlewares], helpers.tryRoute(controllers.topics.pagination));
 
 	const multipart = require('connect-multiparty');
-	const multipartMiddleware = multipart();
+	const multipartMiddleware = multipart({
+		uploadDir: '/usr/src/app/public/uploads/tmp'
+	});
 	const postMiddlewares = [
 		middleware.maintenanceMode,
 		multipartMiddleware,
