@@ -1,12 +1,8 @@
-FROM node:lts
-
-RUN apt-get update \
-    && apt-get install -y vim \
-    && rm -rf /var/lib/apt/lists/* \
+FROM node:14.6.0
 
 RUN mkdir -p /usr/src/app && \
     chown -R node:node /usr/src/app \
-    
+
 WORKDIR /usr/src/app
 
 ARG NODE_ENV
