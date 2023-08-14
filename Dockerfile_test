@@ -1,4 +1,4 @@
-FROM node:14.6.0
+FROM node:lts
 
 RUN mkdir -p /usr/src/app && \
     chown -R node:node /usr/src/app \
@@ -13,7 +13,7 @@ COPY --chown=node:node install/config.test.json /usr/src/app/config.json
 
 USER node
 
-# RUN npm config set registry http://registry.npm.taobao.org
+RUN npm config set registry http://registry.npmmirror.com
 RUN npm install -omit=dev && \
     npm cache clean --force
 
