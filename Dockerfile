@@ -12,7 +12,7 @@ COPY --chown=node:node install/config.prod.json /usr/src/app/config.json
 
 USER node
 
-RUN npm config set registry https://registry.npmmirror.com
+# RUN npm config set registry https://registry.npmmirror.com
 RUN npm install -omit=dev && \
     npm cache clean --force
 
